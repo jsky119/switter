@@ -1,8 +1,16 @@
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import React, { useState } from "react";
+import { authService } from "fbase";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newAccount, setNewAccount] = useState(false);
+  const [error, setError] = useState("");
   /*input에 값이 입력될 때 onChange function을 호출
   onChange function은 input에 입력한 value를 토대로  
   setEmail과 setPassword를 통해 state에 저장됨*/
@@ -18,8 +26,28 @@ const Auth = () => {
       setPassword(value);
     }
   };
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
+    //onSubmit event에 createUser 혹은 signIn 기능이 동작하도록 함
     event.preventDefault();
+    try {
+      let data;
+      if (newAccount) {
+        //create account
+        const auth = getAuth();
+        data = await createUserWithEmailAndPassword(
+          authService,
+          email,
+          password
+        );
+      } else {
+        //login
+        const auth = getAuth();
+        data = await signInWithEmailAndPassword(authService, email, password);
+      }
+      console.log(data);
+    } catch (error) {
+      setError(alert(error.message));
+    }
   };
   return (
     <div>
@@ -40,7 +68,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="LogIn" />
+        <input type="submit" value={newAccount ? "Create Account" : "LogIn"} />
       </form>
       <div>
         <button>Continue with Google</button>
