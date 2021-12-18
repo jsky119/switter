@@ -1,9 +1,16 @@
+import { dbService } from "fbase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useState } from "react";
 
 const Home = () => {
   const [sweet, setSweet] = useState("");
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    await addDoc(collection(dbService, "sweets"), {
+      sweet,
+      createdAt: serverTimestamp(),
+    });
+    setSweet("");
   };
   const onChange = (event) => {
     const {
@@ -13,7 +20,7 @@ const Home = () => {
   };
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input
           value={sweet}
           onChange={onChange}
