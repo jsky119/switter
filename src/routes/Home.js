@@ -3,31 +3,47 @@ import {
   addDoc,
   collection,
   getDocs,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
   const [sweets, setSweets] = useState([]);
-  const getSweets = async () => {
-    const dbSweets = await getDocs(collection(dbService, "sweets"));
-    dbSweets.forEach((document) => {
-      const sweetObj = {
-        ...document.data(),
-        id: document.id,
-      };
-      setSweets((prev) => [sweetObj, ...prev]);
-    });
-  };
+  // const getSweets = async () => {
+  //   const dbSweets = await getDocs(collection(dbService, "sweets"));
+  //   dbSweets.forEach((document) => {
+  //     const sweetObj = {
+  //       ...document.data(),
+  //       id: document.id,
+  //     };
+  //     setSweets((prev) => [sweetObj, ...prev]);
+  //   });
+  // };
+
   useEffect(() => {
-    getSweets();
+    const q = query(
+      collection(dbService, "sweets"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const sweetArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setSweets(sweetArr);
+    });
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
     await addDoc(collection(dbService, "sweets"), {
-      sweet,
+      text: sweet,
       createdAt: serverTimestamp(),
+      creatorId: userObj.uid,
     });
     setSweet("");
   };
@@ -37,7 +53,6 @@ const Home = () => {
     } = event;
     setSweet(value);
   };
-  console.log(sweets);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -53,7 +68,7 @@ const Home = () => {
       <div>
         {sweets.map((sweet) => (
           <div key={sweet.id}>
-            <h4>{sweet.sweet}</h4>
+            <h4>{sweet.text}</h4>
           </div>
         ))}
       </div>
