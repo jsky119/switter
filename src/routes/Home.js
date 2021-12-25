@@ -67,6 +67,24 @@ const Home = ({ userObj }) => {
     } = event;
     setSweet(value);
   };
+  const onFileChange = (event) => {
+    //console.log(event.target.files); //console에 FileList가 출력
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0];
+    //console.log(theFile); //console에 File이 출력
+
+    //fileReader API를 이용, 파일을 읽는 기능 구현
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      //onloadend는 읽기 동작이 끝났을 때 발생하는 이벤트 핸들러
+      console.log(finishedEvent);
+    };
+    //theFile의 내용을 읽음, result에는 파일 데이터를 나타내는 URL이 포함됨
+    reader.readAsDataURL(theFile);
+    console.log(theFile);
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -77,6 +95,7 @@ const Home = ({ userObj }) => {
           placeholder="Type something..."
           maxLength={300}
         />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Sweet" />
       </form>
       <div>
