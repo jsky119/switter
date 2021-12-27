@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 const Home = ({ userObj }) => {
   const [sweet, setSweet] = useState("");
   const [sweets, setSweets] = useState([]);
+  const [attachment, setAttachment] = useState();
   // const getSweets = async () => {
   //   const dbSweets = await getDocs(collection(dbService, "sweets"));
   //   dbSweets.forEach((document) => {
@@ -79,12 +80,19 @@ const Home = ({ userObj }) => {
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
       //onloadend는 읽기 동작이 끝났을 때 발생하는 이벤트 핸들러
-      console.log(finishedEvent);
+      //console.log(finishedEvent);
+      const {
+        //읽기 동작이 완료되면 finishedEvent의 result를 attachment에 set
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
     };
     //theFile의 내용을 읽음, result에는 파일 데이터를 나타내는 URL이 포함됨
     reader.readAsDataURL(theFile);
-    console.log(theFile);
+    //console.log(theFile);
   };
+  //Clear Photo button click 시 attachment의 값을 null로 set하여 사진과 버튼이 보이지 않게 함
+  const onClearAttachment = () => setAttachment(null);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -97,6 +105,12 @@ const Home = ({ userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Sweet" />
+        {attachment && ( //img와 button이 들어있는 div는 attachment가 있을 때만 보임
+          <div>
+            <img src={attachment} width="50px" height="50px" />
+            <button onClick={onClearAttachment}>Clear Photo</button>
+          </div>
+        )}
       </form>
       <div>
         {sweets.map((sweet) => (
