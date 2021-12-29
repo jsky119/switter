@@ -10,7 +10,7 @@ import {
   query,
   serverTimestamp,
 } from "firebase/firestore";
-import { ref, uploadString } from "firebase/storage";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -60,16 +60,25 @@ const Home = ({ userObj }) => {
     //google cloud storage 버킷을 이용하여 파일 업로드 기능 구현
     /* file control을 위해 참조 생성, storage를 get, 
     업로드한 파일 위치는 버킷 내에 user id로 생성되며 파일명은 uuid범용 고유 식별자로 생성 */
-    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
     // 문자열에서 파일 업로드는 firebase v8에선 putString을 사용하지만 v9에선 uploadString을 사용
-    const response = await uploadString(fileRef, attachment, "data_url");
-    console.log(response);
+    const response = await uploadString(attachmentRef, attachment, "data_url");
+    const attachmentUrl = await getDownloadURL(response.ref);
+    const sweetObj = {
+      text: sweet,
+      createdAt: serverTimestamp(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
     /* await addDoc(collection(dbService, "sweets"), {
       text: sweet,
       createdAt: serverTimestamp(),
       creatorId: userObj.uid,
     });
     setSweet(""); */
+    await addDoc(collection(dbService, "sweets"), sweetObj);
+    setSweet("");
+    setAttachment("");
   };
   const onChange = (event) => {
     const {
