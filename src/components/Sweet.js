@@ -46,6 +46,9 @@ const Sweet = ({ sweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{sweetObj.text}</h4>
+          {sweetObj.attachmentUrl && (
+            <img src={sweetObj.attachmentUrl} width="50px" height="50px" />
+          )}
           {isOwner && (
             /*Home에서 creatorId와 userObj의 uid를 비교하여 
         게시물의 작성자인지 검증하고 이를 true나 false 값으로 가지는
