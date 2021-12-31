@@ -4,7 +4,6 @@ import {
   addDoc,
   collection,
   getDocs,
-  getFirestore,
   onSnapshot,
   orderBy,
   query,
@@ -58,7 +57,7 @@ const Home = ({ userObj }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     let attachmentUrl = "";
-    if (attachment != "") {
+    if (attachment !== "") {
       //google cloud storage 버킷을 이용하여 파일 업로드 기능 구현
       /* file control을 위해 참조 생성, storage를 get, 
     업로드한 파일 위치는 버킷 내에 user id로 생성되며 파일명은 uuid범용 고유 식별자로 생성 */
