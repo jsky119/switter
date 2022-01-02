@@ -1,34 +1,45 @@
-import React, { useEffect } from "react";
-import { authService, dbService } from "fbase";
+import React, { useState } from "react";
+import { authService } from "fbase";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { getAuth, updateProfile } from "firebase/auth";
 
 export default ({ userObj }) => {
   /*react router의 useNavigate hook을 이용하여 
     Logout 버튼을 클릭하여 onLogoutClick 호출 시 
     Logout과 동시에 navigate를 통해 root 경로로 이동*/
   const navigate = useNavigate();
+  const auth = getAuth();
+  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const onLogOutClick = () => {
     authService.signOut();
     navigate("/");
   };
-  const getMySweets = async () => {
-    const sweetsRef = collection(dbService, "sweets");
-    const q = query(
-      sweetsRef,
-      where("creatorId", "==", userObj.uid),
-      orderBy("createdAt", "desc")
-    );
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setNewDisplayName(value);
   };
-  useEffect(() => {
-    getMySweets();
-  }, []);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    //가지고 있는 userObj의 displayName과 input에 입력한 newDisplayName이 같으면 update하지 않음
+    if (userObj.displayName !== newDisplayName) {
+      await updateProfile(userObj, {
+        displayName: newDisplayName,
+      });
+    }
+  };
   return (
     <>
+      <form onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          type="text"
+          plcaeholder="Display name"
+          value={newDisplayName}
+        />
+        <input type="submit" value="Update Profile" />
+      </form>
       <button onClick={onLogOutClick}>Logout</button>
     </>
   );

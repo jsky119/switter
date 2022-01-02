@@ -7,6 +7,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
   serverTimestamp,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
@@ -80,6 +81,21 @@ const Home = ({ userObj }) => {
     setSweet("");
     setAttachment("");
   };
+  const getMySweets = async () => {
+    const sweetsRef = collection(dbService, "sweets");
+    const q = query(
+      sweetsRef,
+      where("creatorId", "==", userObj.uid),
+      orderBy("createdAt", "desc")
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  };
+  useEffect(() => {
+    getMySweets();
+  }, []);
   const onChange = (event) => {
     const {
       target: { value },
