@@ -32,7 +32,7 @@ export default ({ userObj, refreshUser }) => {
   };
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form className="container" onSubmit={onSubmit}>
         <input
           onChange={onChange}
           type="text"
