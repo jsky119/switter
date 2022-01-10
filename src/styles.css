@@ -1,8 +1,62 @@
 @import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: white;
+  font-family: "Noto Serif KR", serif;
+  font-size: 18px;
+}
+
+form {
+  width: 100%;
+}
+
+input {
+  all: unset;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background-color: white;
+  color: black;
+  border: 1px solid #1da1f3;
+}
 
 .container {
   width: 100%;
   max-width: 320px;
   display: flex;
   flex-direction: column;
+}
+
+/* Auth */
+
+/* AuthForm */
+.mainIcon {
+}
+
+.authSwitch {
+  color: #1da1f3;
+  cursor: pointer;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.authError {
+  color: #f3993f;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
 }

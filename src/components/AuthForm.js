@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useState } from "react";
+import MainIcon from "./MainIcon";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -51,8 +52,10 @@ const AuthForm = () => {
   const toggleAccount = () => setNewAccount((prev) => !prev);
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form className="container" onSubmit={onSubmit}>
+        <MainIcon className="mainIcon" />
         <input
+          className="authInput"
           name="email"
           type="email"
           placeholder="Email"
@@ -61,6 +64,7 @@ const AuthForm = () => {
           onChange={onChange}
         />
         <input
+          className="authInput"
           name="password"
           type="password"
           placeholder="Password"
@@ -68,9 +72,14 @@ const AuthForm = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value={newAccount ? "Create Account" : "Login"} />
+        <input
+          className="authInput authSubmit"
+          type="submit"
+          value={newAccount ? "Create Account" : "Login"}
+        />
+        {error && <span className="authError">error</span>}
       </form>
-      <span onClick={toggleAccount}>
+      <span className="authSwitch" onClick={toggleAccount}>
         {newAccount ? "Sign In" : "Create Account"}
       </span>
     </>
