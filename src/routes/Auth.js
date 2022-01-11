@@ -6,6 +6,9 @@ import {
 } from "firebase/auth";
 import React from "react";
 import AuthForm from "components/AuthForm";
+import { ReactComponent as AuthIcon } from "components/Icon.svg";
+import GoogleIcon from "../img/google_icon.svg";
+import GithubIcon from "../img/github_icon.svg";
 
 const Auth = () => {
   const onSocialClick = async (event) => {
@@ -40,13 +43,24 @@ const Auth = () => {
   };
   return (
     <div className="authContainer">
+      <AuthIcon className="authIcon" />
       <AuthForm />
-      <div>
-        <button className="authBtn" onClick={onSocialClick} name="google">
+      <div className="auth__socialBtns">
+        <button
+          className="auth__socialBtn"
+          onClick={onSocialClick}
+          name="google"
+        >
           Continue with Google
+          <img class="socialIcon" src={GoogleIcon} />
         </button>
-        <button className="authBtn" onClick={onSocialClick} name="github">
+        <button
+          className="auth__socialBtn"
+          onClick={onSocialClick}
+          name="github"
+        >
           Continue with Github
+          <img class="socialIcon" src={GithubIcon} />
         </button>
       </div>
     </div>

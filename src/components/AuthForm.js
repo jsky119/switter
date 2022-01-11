@@ -4,7 +4,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useState } from "react";
-import MainIcon from "./MainIcon";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -53,7 +52,6 @@ const AuthForm = () => {
   return (
     <>
       <form className="container" onSubmit={onSubmit}>
-        <MainIcon className="mainIcon" />
         <input
           className="authInput"
           name="email"

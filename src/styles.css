@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: white;
+  background-color: #1da1f3;
   font-family: "Noto Serif KR", serif;
   font-size: 18px;
 }
@@ -40,23 +40,77 @@ button {
 }
 
 /* Auth */
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.authIcon {
+  color: white;
+  width: 150px;
+  margin-bottom: 15px;
+}
 
 /* AuthForm */
-.mainIcon {
+
+.authInput {
+  background-color: white;
+  max-width: 320px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #228bcc;
+  border-radius: 30px;
+  color: rgba(1, 1, 1);
+  font-size: 18px;
+  text-align: center;
+}
+
+.authInput::placeholder {
+  color: rgba(1, 1, 1, 0.3);
+}
+
+.authSubmit {
+  color: #2999df;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 13px;
+  margin-top: 20px;
 }
 
 .authSwitch {
-  color: #1da1f3;
+  color: white;
   cursor: pointer;
   display: block;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  padding: 10px;
   font-size: 16px;
 }
 
+.auth__socialBtns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+}
+
+.auth__socialBtn {
+  cursor: pointer;
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+}
+
+.socialIcon {
+  margin-left: 5px;
+  width: 20px;
+}
+/* 
 .authError {
   color: #f3993f;
   text-align: center;
   font-weight: 500;
   font-size: 12px;
-}
+} */
