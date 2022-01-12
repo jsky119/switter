@@ -52,7 +52,7 @@ const Auth = () => {
           name="google"
         >
           Continue with Google
-          <img class="socialIcon" src={GoogleIcon} />
+          <img class="auth__socialIcon" src={GoogleIcon} />
         </button>
         <button
           className="auth__socialBtn"
@@ -60,7 +60,7 @@ const Auth = () => {
           name="github"
         >
           Continue with Github
-          <img class="socialIcon" src={GithubIcon} />
+          <img class="auth__socialIcon" src={GithubIcon} />
         </button>
       </div>
     </div>
