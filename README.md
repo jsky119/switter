@@ -19,3 +19,8 @@ npm install react-router-dom
 ```
 npm install uuid
 ```
+
+```
+npm install scss
+sass --watch input.scss output.css
+```
