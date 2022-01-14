@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "components/Icon.svg";
 
 const Navigation = ({ userObj }) => (
-  <nav>
-    <ul>
+  <nav className="nav">
+    <ul className="">
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <HomeIcon className="nav__homeBtn" />
+        </Link>
       </li>
-      <li>
+      <li className="nav__profileBtn">
         <Link to="/profile">
           {userObj?.displayName?.length
             ? `${userObj.displayName}님의 Profile`

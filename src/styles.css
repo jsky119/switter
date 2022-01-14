@@ -38,6 +38,11 @@ button {
   flex-direction: column;
 }
 
+/* Home */
+.nav__homeBtn {
+  width: 50px;
+}
+
 /* Auth */
 .authContainer {
   display: flex;
@@ -47,7 +52,7 @@ button {
   height: 100vh;
 }
 
-.authIcon {
+.auth__icon {
   color: white;
   width: 150px;
   margin-bottom: 15px;
@@ -113,12 +118,6 @@ button {
   font-size: 16px;
 }
 
-/* 
-.authError {
-  color: #f3993f;
-  text-align: center;
-  font-weight: 500;
-  font-size: 12px;
-} */
+/*# sourceMappingURL=styles.css.map */
 
 /*# sourceMappingURL=styles.css.map */

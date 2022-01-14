@@ -43,7 +43,7 @@ const Auth = () => {
   };
   return (
     <div className="authContainer">
-      <AuthIcon className="authIcon" />
+      <AuthIcon className="auth__icon" />
       <AuthForm />
       <div className="auth__socialBtns">
         <button

@@ -1,5 +1,6 @@
 @import "./reset.css";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -38,6 +39,11 @@ button {
   flex-direction: column;
 }
 
+/* Home */
+.nav__homeBtn {
+  width: 50px;
+}
+
 /* Auth */
 .authContainer {
   display: flex;
@@ -47,7 +53,7 @@ button {
   height: 100vh;
 }
 
-.authIcon {
+.auth__icon {
   color: white;
   width: 150px;
   margin-bottom: 15px;
