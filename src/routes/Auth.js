@@ -6,9 +6,9 @@ import {
 } from "firebase/auth";
 import React from "react";
 import AuthForm from "components/AuthForm";
-import { ReactComponent as AuthIcon } from "components/Icon.svg";
-import GoogleIcon from "../img/google_icon.svg";
-import GithubIcon from "../img/github_icon.svg";
+import { ReactComponent as AuthIcon } from "components/img/Icon.svg";
+import GoogleIcon from "components/img/google_icon.svg";
+import GithubIcon from "components/img/github_icon.svg";
 
 const Auth = () => {
   const onSocialClick = async (event) => {
