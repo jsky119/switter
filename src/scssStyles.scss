@@ -39,7 +39,7 @@ button {
   flex-direction: column;
 }
 
-/* Home */
+/* navigation */
 .nav {
   max-width: 500px;
   margin: 0 auto;
@@ -149,6 +149,7 @@ button {
   border: 2px solid #ffffff;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bolder;
   padding: 13px;
   margin-top: 20px;
   overflow: hidden;
@@ -163,14 +164,18 @@ button {
   font-size: 16px;
 }
 
+/* Home */
+
 /* Profile Page */
 
 .profileForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .profile__input {
   background-color: #ffffff;
-  max-width: 320px;
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -179,6 +184,32 @@ button {
   color: #010101;
   font-size: 18px;
   text-align: center;
+}
+
+.profile__submit {
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  background-color: #1da1f3;
+  border: 2px solid #ffffff;
+  font-weight: bolder;
+}
+
+.profile__logoutBtn {
+  cursor: pointer;
+  margin-top: 50px;
+  margin-left: auto;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e92929;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
 }
 
 /*# sourceMappingURL=styles.css.map */

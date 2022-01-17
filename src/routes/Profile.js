@@ -32,11 +32,12 @@ export default ({ userObj, refreshUser }) => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container profile__container">
         <form className="profileForm" onSubmit={onSubmit}>
           <input
             className="profile__input"
             onChange={onChange}
+            autoFocus
             type="text"
             plcaeholder="Display name"
             value={newDisplayName}
@@ -46,10 +47,10 @@ export default ({ userObj, refreshUser }) => {
             type="submit"
             value="Update Profile"
           />
+          <span className="profile__logoutBtn" onClick={onLogOutClick}>
+            Logout
+          </span>
         </form>
-        <span className="profile__logoutBtn" onClick={onLogOutClick}>
-          Logout
-        </span>
       </div>
     </>
   );
